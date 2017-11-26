@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <v-toolbar color="indigo" app/>
+    <title-bar></title-bar>
     <router-view/>
   </div>
 </template>
 
 <script>
+  import TitleBar from './components/TitleBar'
   export default {
-    name: 'app'
+    name: 'app',
+    components: {
+      TitleBar
+    }
   }
 </script>
 
@@ -18,5 +22,9 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    background-color: #FAFFFD;
+  }
+  .primary {
+    background-color: #A71D31;
   }
 </style>
