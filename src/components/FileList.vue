@@ -29,19 +29,23 @@ export default {
     return {
       folders: [{
         name: 'folder',
-        icon: 'folder'
+        icon: 'folder',
+        id: 1
       }, {
         name: 'Another folder',
-        icon: 'folder'
+        icon: 'folder',
+        id: 2
       }],
       files: [{
         name: 'file',
         icon: 'assignment',
-        timestamp: 'May 20, 2017'
+        timestamp: 'May 20, 2017',
+        id: 3
       }, {
         name: 'another file',
         icon: 'assignment',
-        timestamp: 'Jan 25, 2017'
+        timestamp: 'Jan 25, 2017',
+        id: 4
       }]
     }
   }

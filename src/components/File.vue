@@ -5,13 +5,27 @@
             <v-icon> {{ file.icon }} </v-icon>
         </v-list-tile-avatar>
         <v-list-tile-content>
-          <v-list-tile-title v-on:dblclick="startEditing" v-show="!isEditing"> {{ file.name }} </v-list-tile-title>
-          <v-list-tile-title v-show="isEditing">
-            <input type="text"  v-model="file.name"
-              v-on:blur="stopEditing" @keyup.enter="stopEditing">
-          </v-list-tile-title>
+          <v-list-tile-title v-show="!isEditing"> {{ file.name }} </v-list-tile-title>
+            <v-text-field
+              v-bind:ref="file.id"
+              @click.stop v-show="isEditing"
+              prepend-icon="mode_edit"
+              v-model="file.name"
+              v-on:blur="stopEditing" @keyup.enter="stopEditing"/>
           <v-list-tile-sub-title> {{ file.timestamp }} </v-list-tile-sub-title>
         </v-list-tile-content>
+         <v-list-tile-action @click.stop>
+           <v-menu offset-y>
+              <v-btn icon ripple slot="activator">
+                <v-icon color="grey lighten-1">more_vert</v-icon>
+              </v-btn>
+                <v-list>
+                  <v-list-tile @click="startEditing(file)">
+                    <v-list-tile-title> Rename </v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+           </v-menu>
+        </v-list-tile-action>
     </v-list-tile>
   </div>
 </template>
@@ -25,8 +39,12 @@ export default {
     }
   },
   methods: {
-    startEditing () {
+    startEditing (file) {
       this.isEditing = true
+      let el = this.$refs[file.id]
+      this.$nextTick(() => {
+        el.focus()
+      })
     },
     stopEditing () {
       this.isEditing = false
