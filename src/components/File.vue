@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-list-tile avatar>
+    <v-list-tile avatar ripple @click="">
         <v-list-tile-avatar>
             <v-icon> {{ file.icon }} </v-icon>
         </v-list-tile-avatar>

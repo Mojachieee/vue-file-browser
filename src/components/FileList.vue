@@ -3,6 +3,11 @@
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
         <v-list two-line subheader>
+          <div v-for="file, i in folders">
+            <file  v-bind:file="file"/>
+            <v-divider v-if="i + 1 < folders.length"/>
+          </div>
+          <v-divider/>
           <div v-for="file, i in files">
             <file  v-bind:file="file"/>
             <v-divider v-if="i + 1 < files.length"/>
@@ -22,11 +27,14 @@ export default {
   },
   data () {
     return {
-      files: [{
-        name: 'asd',
-        icon: 'folder',
-        timestamp: 'August 13, 2017'
+      folders: [{
+        name: 'folder',
+        icon: 'folder'
       }, {
+        name: 'Another folder',
+        icon: 'folder'
+      }],
+      files: [{
         name: 'file',
         icon: 'assignment',
         timestamp: 'May 20, 2017'
