@@ -3,7 +3,7 @@
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
         <v-list two-line subheader>
-          <file v-for="file in files" v-bind:file="file" v-bind:key="file.name"/>
+          <file v-for="file in files" v-bind:file="file"/>
         </v-list>
       </v-flex>
     </v-layout>
