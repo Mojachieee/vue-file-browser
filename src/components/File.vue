@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-list-tile avatar ripple @click="">
+    <v-list-tile avatar ripple @click="navigate">
         <v-list-tile-avatar>
             <v-icon> {{ file.icon }} </v-icon>
         </v-list-tile-avatar>
@@ -31,6 +31,14 @@ export default {
     stopEditing () {
       this.isEditing = false
       this.$emit('update')
+    },
+    navigate () {
+      this.$router.push({
+        name: 'Editor',
+        params: {
+          name: this.file.name
+        }
+      })
     }
   }
 }
