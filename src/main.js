@@ -7,7 +7,11 @@ import Vuetify from 'vuetify'
 import '../node_modules/vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#A71D31'
+  }
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

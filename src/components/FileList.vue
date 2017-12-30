@@ -3,7 +3,10 @@
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
         <v-list two-line subheader>
-          <file v-for="file in files" v-bind:file="file"/>
+          <div v-for="file, i in files">
+            <file  v-bind:file="file"/>
+            <v-divider v-if="i + 1 < files.length"/>
+          </div>
         </v-list>
       </v-flex>
     </v-layout>
@@ -27,6 +30,10 @@ export default {
         name: 'file',
         icon: 'assignment',
         timestamp: 'May 20, 2017'
+      }, {
+        name: 'another file',
+        icon: 'assignment',
+        timestamp: 'Jan 25, 2017'
       }]
     }
   }
