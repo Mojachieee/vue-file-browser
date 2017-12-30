@@ -10,7 +10,15 @@ export default new Router({
     {
       path: '/',
       name: 'FileList',
-      component: FileList
+      component: FileList,
+      props: {
+        path: ''
+      }
+    }, {
+      path: '/:path',
+      name: 'FileListPath',
+      component: FileList,
+      props: true
     }, {
       path: '/editor/:name',
       name: 'Editor',

@@ -23,6 +23,9 @@
                   <v-list-tile @click="startEditing(file)">
                     <v-list-tile-title> Rename </v-list-tile-title>
                   </v-list-tile>
+                  <v-list-tile @click="remove(file)">
+                    <v-list-tile-title> Delete </v-list-tile-title>
+                  </v-list-tile>
                 </v-list>
            </v-menu>
         </v-list-tile-action>
@@ -51,12 +54,19 @@ export default {
       this.$emit('update')
     },
     navigate () {
-      this.$router.push({
-        name: 'Editor',
-        params: {
-          name: this.file.name
-        }
-      })
+      if (this.file.folder) {
+        this.$emit('navigate', this.file)
+      } else {
+        this.$router.push({
+          name: 'Editor',
+          params: {
+            name: this.file.name
+          }
+        })
+      }
+    },
+    remove (file) {
+      this.$emit('remove', file)
     }
   }
 }
