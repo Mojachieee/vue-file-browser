@@ -20,10 +20,10 @@
                 <v-icon color="grey lighten-1">more_vert</v-icon>
               </v-btn>
                 <v-list>
-                  <v-list-tile @click="startEditing(file)">
+                  <v-list-tile @click="startEditing">
                     <v-list-tile-title> Rename </v-list-tile-title>
                   </v-list-tile>
-                  <v-list-tile @click="remove(file)">
+                  <v-list-tile @click="remove">
                     <v-list-tile-title> Delete </v-list-tile-title>
                   </v-list-tile>
                 </v-list>
@@ -42,9 +42,9 @@ export default {
     }
   },
   methods: {
-    startEditing (file) {
+    startEditing () {
       this.isEditing = true
-      let el = this.$refs[file.id]
+      let el = this.$refs[this.file.id]
       this.$nextTick(() => {
         el.focus()
       })
@@ -54,19 +54,10 @@ export default {
       this.$emit('update')
     },
     navigate () {
-      if (this.file.folder) {
-        this.$emit('navigate', this.file)
-      } else {
-        this.$router.push({
-          name: 'Editor',
-          params: {
-            name: this.file.name
-          }
-        })
-      }
+      this.$emit('navigate', this.file)
     },
-    remove (file) {
-      this.$emit('remove', file)
+    remove () {
+      this.$emit('remove', this.file)
     }
   }
 }

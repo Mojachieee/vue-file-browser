@@ -9,7 +9,7 @@
           </div>
           <v-divider/>
           <div v-for="file, i in files">
-            <file v-on:remove="removeFile"  v-bind:file="file"/>
+            <file v-on:navigate="navigateFile" v-on:remove="removeFile"  v-bind:file="file"/>
             <v-divider v-if="i + 1 < files.length"/>
           </div>
         </v-list>
@@ -28,33 +28,12 @@ export default {
     File
   },
   mounted () {
-    console.log("mounted")
-    this.getFiles(this.$route.params.path)
+    this.getFiles()
   },
   data () {
     return {
-      folders: [{
-        name: 'folder',
-        icon: 'folder',
-        folder: true,
-        id: 1
-      }, {
-        name: 'Another folder',
-        icon: 'folder',
-        folder: true,
-        id: 2
-      }],
-      files: [{
-        name: 'file',
-        icon: 'assignment',
-        timestamp: 'May 20, 2017',
-        id: 3
-      }, {
-        name: 'another file',
-        icon: 'assignment',
-        timestamp: 'Jan 25, 2017',
-        id: 4
-      }]
+      folders: [],
+      files: []
     }
   },
   methods: {
@@ -70,11 +49,19 @@ export default {
         }
       })
     },
-    getFiles (path) {
+    navigateFile (file) {
+      this.$router.push({
+        name: 'Editor',
+        params: {
+          name: file.name,
+          path: this.path + '/' + file.name
+        }
+      })
+    },
+    getFiles () {
       axios.get('' + this.path).then((resp) => {
         let folders = []
         let files = []
-        console.log(resp)
         for (let i = 0; i < Object.keys(resp.data).length; i++) {
           let file = resp.data[i]
           if (file.type === 'folder') {
@@ -99,8 +86,8 @@ export default {
     }
   },
   watch: {
-    '$route.params.path' (newPath) {
-      this.getFiles(newPath)
+    '$route.params.path' () {
+      this.getFiles()
     }
   }
 }

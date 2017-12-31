@@ -11,7 +11,7 @@
           textarea
           v-model="content"
         />
-        <v-btn block secondary 
+        <v-btn block secondary
           :loading="loading"
           @click="save">
           Save Changes
@@ -22,8 +22,12 @@
 </template>
 
 <script>
+let axios = require('axios')
 export default {
-  props: ['name'],
+  props: ['name', 'path'],
+  mounted () {
+    this.getContents()
+  },
   data () {
     return {
       loader: null,
@@ -37,6 +41,12 @@ export default {
     },
     navigate () {
       this.$router.go(-1)
+    },
+    getContents () {
+      axios.get('' + this.path).then((resp) => {
+        console.log(resp.data)
+        this.content = resp.data
+      })
     }
   },
   watch: {
